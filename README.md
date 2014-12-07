@@ -9,6 +9,7 @@ Requirements:
 - any **Windows** OS (I used the `winsound` module which provides `Beep(frequency, duration)` but feel free to contribute an alternative - I would be more than happy to see a platform-independent solution)
 
 Features:
+- 3 demo songs included!
 - songs with multiple tracks
 - frequency visualisation
 - exporting tracks as standalone python script
