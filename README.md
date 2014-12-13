@@ -17,4 +17,61 @@ Features:
 - sorry, no english translation
 
 ## First steps
-*TODO: short usage guide*
+### Standalone
+**beepforce.py** is the main script. It can load and play a song by itself and provides a server for centralised distribution. Once started you are presented with a terminal. You can list all commands by entering
+```
+>>> commands
+```
+and you can get further help with
+```
+>>> help [command]
+```
+
+Let's go for a song:
+```
+>>> load tetris.bfu
+Analysiere Datei...
+- Dateiformat: 6
+- Musikstück: Tetris Theme, Type A
+- Komponist: -
+- Autor: Niko
+- Einheitendauer (ms): 100
+- Standardakzentuierung: t
+- Oktavierung: 1
+=> Datei geladen, 3 Tracks gefunden.
+```
+Three tracks were found and we chose the first one which is usually the lead melody:
+```
+>>> track 1
+Verarbeite Spur 1...
+Akzentuiere & optimiere Track...
+=> Track konvertiert, 254 Noten und Pausen notiert.
+```
+This track consists of 254 notes and rests. If we played the song right now it would be executed sequentially which might sound a bit wonky because of the minor delay in between the execution of each line. Therefore you normally want to put these on a timeline meaning that by threaded execution the accuracy is greatly improved. A cut-off interval has to be specified to force pauses between notes - otherwise some speakers skip a few notes in rapid succession.
+20 milliseconds tend to work well:
+```
+>>> timeline 20
+Erstelle Timeline...
+Verkürze Noten...
+=> Timeline erstellt, 133 Objekte, Liedlänge 51.2sek, 12 Kürzungen
+```
+The song is about 52 seconds long and ready to be played - have fun!
+```
+>>> play
+Quelle: Timeline
+[ Musik starten mit Enter ]
+...playing...
+
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░ 1319 Hz
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░ 988 Hz
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░ 1047 Hz
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░ 1175 Hz
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░ 1319 Hz
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░ 1175 Hz
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░ 1047 Hz
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░ 988 Hz
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░ 880 Hz
+...
+```
+### Server mode
+*TODO*
