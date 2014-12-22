@@ -74,4 +74,120 @@ Quelle: Timeline
 ...
 ```
 ### Server mode
-*TODO*
+This is the real deal! You start the ***Beepforce United(:tm:) Server(:tm:)*** and a bunch of client computers can connect to it. In the server terminal you select a song, launch the "compilation" and initiate distribution. Once every client received its part you may start the countdown and let the party begin :wink:
+
+I will leave out the explanations this time as you can surely work everything out by yourself (`commands` is your friend and all server commands are interactive):
+
+***Server (beepforce.py)***
+```
+>>> server
+Starte Server an 192.168.0.42...
+```
+***Client (beep_client.py)***
+```
+Willkommen zum BEEPFORCE-Client! (V1.6)
+[...]
+Bitte Server-IP eingeben: 192.168.0.42
+[ ENTER zum Verbinden ]
+Kontaktiere Server...
+Verbunden!
+Warte auf Server...
+Server: Bitte PC-Infos eingeben (optional) [ Bestätigen mit ENTER ]:
+Hello World!
+Sende Antwort...
+Warte auf Server...
+Server: Anmeldung erfolgreich! (1 Clienten online)
+=> DIE KONTROLLE GEHT HIERMIT AN DEN SERVER ÜBER :)
+Warte auf Server...
+```
+***Server (beepforce.py)***
+```
+server>>> setup
+
+CLIENTEINSTELLUNGEN
+Musik-Visualisierungen aktivieren (j/n): j
+Versende Einstellungen...
+Einstellungen geändert.
+
+SERVEREINSTELLUNGEN
+Countdown in Sekunden: 5
+```
+```
+server>>> send
+Datei: tetris.bfu
+Analysiere Datei...
+- Dateiformat: 6
+- Musikstück: Tetris Theme, Type A
+- Komponist: -
+- Autor: Niko
+- Einheitendauer (ms): 100
+- Standardakzentuierung: t
+- Oktavierung: 1
+=> Datei geladen, 3 Tracks gefunden.
+Notenabstand in ms: 20
+
+Distributionsmodus
+   0: manuelle Trackauswahl
+   1: jeden Track möglichst einmal versenden
+   2: Tracks gleichmäßig an alle Clienten
+Modus wählen: 2
+Letzter Verbindungscheck...
+
+*** Client 1 ***
+IP: 192.168.0.42
+Angemeldet: 2014-12-15 19:38:40.093458
+Infos: Hello World!
+
+=> Client 1 an 192.168.0.42 ("Hello World!")
+   bekommt Track 1
+Verarbeite Spur 1...
+Akzentuiere & optimiere Track...
+=> Track konvertiert, 254 Noten und Pausen notiert.
+Erstelle Timeline...
+Verkürze Noten...
+=> Timeline erstellt, 133 Objekte, Liedlänge 51.2sek, 12 Kürzungen
+Übertrage Daten...
+Track übertragen.
+
+################################
+=> DISTRIBUTION ABGESCHLOSSEN <=
+################################
+```
+```
+server>>> tcp_launch
+Latenz in Millisekunden: 0
+[ Mit Enter Startsequenz einleiten ]
+Initialisiere Startsequenz für TCP-Launch...
+Sende Startsignal....
+=> Startsignal gesendet!
+```
+***Client (beep_client.py)***
+```
+[...]
+Übertrage Daten...
+Transfer abgeschlossen, 133 Timelineobjekte empfangen
+Warte auf Server...
+TCP-Launch initialisiert, warte auf Startschuss vom Server...
+Warte auf Server...
+...playing...
+
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░
+...
+
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░
+▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▒░
+=> Abspielen beendet.
+Warte auf Server...
+```
